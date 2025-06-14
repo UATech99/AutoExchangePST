@@ -1,16 +1,16 @@
 ﻿
 # Define source and destination paths
-$sourcePath = "C:\pst"
+$sourcePath = "C:\pst" # Folder where PST are Exported
 $currentDate = (Get-Date).ToString("dd.MM.yyyy")
 $currentTime = (Get-Date).ToString("HHmmss")
 
 # Ensure the destination folder exists
 $sourceFolder = "C:\pst"
-$rarExe = "C:\Program Files\WinRAR\rar.exe"  # Adjust if WinRAR is in a different location
+$rarExe = "C:\Program Files\WinRAR\rar.exe"  # Ensure That winRar is installed and Adjust if WinRAR is in a different location
 
 # Check if WinRAR exists
 if (-not (Test-Path $rarExe)) {
-    Write-Host "❌ WinRAR not found at $rarExe. Please check the path." -ForegroundColor Red
+    Write-Host " WinRAR not found at $rarExe. Please check the path." -ForegroundColor Red
     exit
 }
 
@@ -28,10 +28,10 @@ foreach ($file in $pstFiles) {
     # Check if RAR was successfully created, then delete original PST
     if (Test-Path $rarFile) {
         Remove-Item -Path $sourceFile -Force
-        Write-Host "✅ Compressed and deleted: $($file.Name)" -ForegroundColor Green
+        Write-Host " Compressed and deleted: $($file.Name)" -ForegroundColor Green
     } else {
-        Write-Host "❌ Failed to compress: $($file.Name)" -ForegroundColor Red
+        Write-Host " Failed to compress: $($file.Name)" -ForegroundColor Red
     }
 }
 
-Write-Host "`n🎉 All .pst files have been processed." -ForegroundColor Cyan
+Write-Host "`n All .pst files have been processed." -ForegroundColor Cyan

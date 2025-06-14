@@ -1,18 +1,18 @@
 ﻿# Set variables
-$sourceFolder = "C:\pst"
+$sourceFolder = "C:\pst" # Write here your source folder where PST is exported
 
 # Get current month and year (e.g., "June 2025")
 $monthFolder = Get-Date -Format "MMMM yyyy"
 
 # Root network backup path
-$destinationRoot = "\\192.168.4.54\fileserver\backup\Daily Backup Copy\PST-Backup\$monthFolder"
+$destinationRoot = "<Your Network Shared Drive path>"
 
 # Create date-based subfolder (e.g., 29-05-2025)
 $dateFolder = Get-Date -Format 'dd-MM-yyyy'
 $destinationPath = Join-Path $destinationRoot $dateFolder
 
 # Ensure log folder exists
-$logfolder = "C:\PST_Export_Logs"
+$logfolder = "C:\PST_Export_Logs" # Logs Automatically created with the scripts
 if (-not (Test-Path $logfolder)) {
     New-Item -ItemType Directory -Path $logfolder | Out-Null
 }
@@ -55,6 +55,6 @@ foreach ($file in $rarFiles) {
 }
 
 # Final message
-$finalMsg = "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') 🎉 All .rar files processed."
+$finalMsg = "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  All .rar files processed."
 Write-Host "`n$finalMsg" -ForegroundColor Cyan
 Add-Content -Path $logFile -Value $finalMsg
